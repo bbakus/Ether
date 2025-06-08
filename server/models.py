@@ -1,34 +1,38 @@
 from sqlalchemy_serializer import SerializerMixin
-from sqlalchemy import Column, Boolean, Integer, String, Float, ForeignKey, Table
+from sqlalchemy import Column, Boolean, Integer, String, Float, ForeignKey, Table, create_engine
+from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 from datetime import date
 
+# Create the base class
+Base = declarative_base()
+
 # Association tables for different many-to-many relationships
 deck_session_association = Table(
-    'deck_sessions',
+    'deck_sessions', Base.metadata,
     Column('deck_id', Integer, ForeignKey('decks.id'), primary_key=True),
     Column('session_id', Integer, ForeignKey('sessions.id'), primary_key=True)
 )
 
 card_session_association = Table(
-    'card_sessions', 
+    'card_sessions', Base.metadata,
     Column('card_id', Integer, ForeignKey('cards.id'), primary_key=True),
     Column('session_id', Integer, ForeignKey('sessions.id'), primary_key=True)
 )
 
 spread_session_association = Table(
-    'spread_sessions',
+    'spread_sessions', Base.metadata,
     Column('spread_id', Integer, ForeignKey('spreads.id'), primary_key=True), 
     Column('session_id', Integer, ForeignKey('sessions.id'), primary_key=True)
 )
 
 layout_cards_association = Table(
-    'layout_cards',
+    'layout_cards', Base.metadata,
     Column('spread_id', Integer, ForeignKey('spreads.id'), primary_key=True),
     Column('card_id', Integer, ForeignKey('cards.id'), primary_key=True)
 )
 
-class Deck(SerializerMixin):
+class Deck(Base, SerializerMixin):
 
     __tablename__ = 'decks'
 
@@ -41,7 +45,7 @@ class Deck(SerializerMixin):
     sessions = relationship('Session', secondary=deck_session_association, back_populates='decks')
 
 
-class Card(SerializerMixin):
+class Card(Base, SerializerMixin):
 
     __tablename__='cards'
 
@@ -62,20 +66,21 @@ class Card(SerializerMixin):
     spreads = relationship('Spread', secondary=layout_cards_association, back_populates='cards')
 
 
-class Spread(SerializerMixin):
+class Spread(Base, SerializerMixin):
 
     __tablename__='spreads'
     
     id = Column(Integer, primary_key=True)
     name = Column(String, nullable=False)
     layout = Column(String)
+    session_id = Column(Integer, ForeignKey('sessions.id'))
 
     # Many-to-many: Spread can be used in many sessions
     sessions = relationship('Session', secondary=spread_session_association, back_populates='spreads')
-    cards = relationship('Card', secondary=layout_cards_association, back_populaes='spreads')
+    cards = relationship('Card', secondary=layout_cards_association, back_populates='spreads')
 
 
-class Session(SerializerMixin):
+class Session(Base, SerializerMixin):
 
     __tablename__='sessions'
 
