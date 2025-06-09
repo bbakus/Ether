@@ -1,5 +1,5 @@
 import os
-from openai import OpenAI
+import openai
 from dotenv import load_dotenv
 import json
 from typing import List, Dict
@@ -7,12 +7,10 @@ from typing import List, Dict
 # Load environment variables
 load_dotenv()
 
-# Initialize OpenAI client
-api_key = os.getenv('OPENAI_API_KEY')
-if not api_key:
+# Initialize OpenAI
+openai.api_key = os.getenv('OPENAI_API_KEY')
+if not openai.api_key:
     raise ValueError("OPENAI_API_KEY environment variable is required")
-
-client = OpenAI(api_key=api_key)
 
 def get_tarot_reading(cards: List[Dict], spread_type: str = "general", question: str = ""):
     """
@@ -106,7 +104,7 @@ IMPORTANT INSTRUCTIONS:
 Please interpret these cards in relation to each other and provide guidance that specifically references the cards by name."""
 
     try:
-        response = client.chat.completions.create(
+        response = openai.ChatCompletion.create(
             model="gpt-4",
             messages=[
                 {"role": "system", "content": system_prompt},
@@ -117,7 +115,7 @@ Please interpret these cards in relation to each other and provide guidance that
         )
         
         # Parse the JSON response
-        reading_text = response.choices[0].message.content
+        reading_text = response['choices'][0]['message']['content']
         
         try:
             reading_data = json.loads(reading_text)
@@ -175,7 +173,7 @@ Context: {context}
 Include both traditional meanings and how this card might be interpreted in the context of {context}."""
 
     try:
-        response = client.chat.completions.create(
+        response = openai.ChatCompletion.create(
             model="gpt-4",
             messages=[
                 {"role": "system", "content": system_prompt},
@@ -185,7 +183,7 @@ Include both traditional meanings and how this card might be interpreted in the 
             temperature=0.6
         )
         
-        meaning_text = response.choices[0].message.content
+        meaning_text = response['choices'][0]['message']['content']
         
         try:
             meaning_data = json.loads(meaning_text)
@@ -233,7 +231,7 @@ def get_daily_guidance(question: str = ""):
         user_prompt = "Please provide general daily spiritual guidance and inspiration."
     
     try:
-        response = client.chat.completions.create(
+        response = openai.ChatCompletion.create(
             model="gpt-4",
             messages=[
                 {"role": "system", "content": system_prompt},
@@ -243,7 +241,7 @@ def get_daily_guidance(question: str = ""):
             temperature=0.8
         )
         
-        guidance = response.choices[0].message.content
+        guidance = response['choices'][0]['message']['content']
         
         return {
             "success": True,
