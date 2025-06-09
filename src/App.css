@@ -1,6 +1,6 @@
 @font-face {
   font-family: 'Cardinal';
-  src: url('/fonts/Cardinal.ttf');
+  src: url('%PUBLIC_URL%/fonts/Cardinal.ttf');
 }
 
 h1 {
