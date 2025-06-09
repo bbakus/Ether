@@ -9,7 +9,7 @@ load_dotenv()
 
 # Initialize OpenAI client
 client = OpenAI(
-    api_key=os.getenv('OPEN_AI_API_KEY')
+    api_key=os.getenv('OPENAI_API_KEY')
 )
 
 def get_tarot_reading(cards: List[Dict], spread_type: str = "general", question: str = ""):
