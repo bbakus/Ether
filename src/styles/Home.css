@@ -40,8 +40,8 @@
 
 .enter-button{
     font-family: 'Cardinal';
-    position:fixed;
-    z-index: 10;
+    position: fixed;
+    z-index: 100;
     top: 65%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -59,7 +59,6 @@
     letter-spacing: 3px;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
     animation: gradientShift 4s ease infinite;
-    position: relative;
     overflow: hidden;
     min-width: 180px;
     text-align: center;
@@ -104,12 +103,23 @@
   }
   
   .enter-button {
-    top: auto;
-    bottom: 25vh;
-    transform: translateX(-50%);
+    position: fixed;
+    top: auto !important;
+    bottom: 30vh !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    z-index: 100 !important;
     font-size: 1.3rem;
     padding: 18px 35px;
     min-width: 160px;
+  }
+  
+  .enter-button:hover {
+    transform: translateX(-50%) translateY(-3px) scale(1.05) !important;
+  }
+  
+  .enter-button:active {
+    transform: translateX(-50%) translateY(-1px) scale(1.02) !important;
   }
 }
 
@@ -120,13 +130,24 @@
   }
   
   .enter-button {
-    top: auto;
-    bottom: 20vh;
-    transform: translateX(-50%);
+    position: fixed;
+    top: auto !important;
+    bottom: 25vh !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    z-index: 100 !important;
     font-size: 1.2rem;
     padding: 16px 30px;
     min-width: 140px;
     letter-spacing: 2px;
+  }
+  
+  .enter-button:hover {
+    transform: translateX(-50%) translateY(-3px) scale(1.05) !important;
+  }
+  
+  .enter-button:active {
+    transform: translateX(-50%) translateY(-1px) scale(1.02) !important;
   }
 }
 
@@ -137,11 +158,22 @@
   }
   
   .enter-button {
-    top: auto;
-    bottom: 15vh;
-    transform: translateX(-50%);
+    position: fixed;
+    top: auto !important;
+    bottom: 20vh !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    z-index: 100 !important;
     font-size: 1.1rem;
     padding: 14px 25px;
     min-width: 120px;
+  }
+  
+  .enter-button:hover {
+    transform: translateX(-50%) translateY(-3px) scale(1.05) !important;
+  }
+  
+  .enter-button:active {
+    transform: translateX(-50%) translateY(-1px) scale(1.02) !important;
   }
 }
