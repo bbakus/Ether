@@ -19,7 +19,7 @@ def seed_cards():
         major_arcana_cards = [
             {"name": "The Fool", "suit": None, "major_arcana": True, "description": "New beginnings, innocence, spontaneity", "image": "card_images/the_fool.png"},
             {"name": "The Magician", "suit": None, "major_arcana": True, "description": "Manifestation, resourcefulness, power", "image": "card_images/the_magician.png"},
-            {"name": "The High Priestess", "suit": None, "major_arcana": True, "description": "Intuition, sacred knowledge, divine feminine", "image": "card_images/the_high_priestess.png"},
+            {"name": "The High Priestess", "suit": None, "major_arcana": True, "description": "Intuition, sacred knowledge, divine feminine", "image": "card_images/high_priestess.png"},
             {"name": "The Empress", "suit": None, "major_arcana": True, "description": "Femininity, beauty, nature, abundance", "image": "card_images/the_empress.png"},
             {"name": "The Emperor", "suit": None, "major_arcana": True, "description": "Authority, structure, control, fatherhood", "image": "card_images/the_emperor.png"},
             {"name": "The Hierophant", "suit": None, "major_arcana": True, "description": "Spiritual wisdom, religious beliefs, conformity", "image": "card_images/the_hierophant.png"},

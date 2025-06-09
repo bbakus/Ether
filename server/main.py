@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
@@ -17,6 +17,11 @@ CORS(app)  # Enable CORS for all routes
 # Database setup
 engine = create_engine('sqlite:///tarot.db')
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+
+# Serve static files (card images)
+@app.route('/card_images/<filename>')
+def serve_card_image(filename):
+    return send_from_directory('card_images', filename)
 
 @app.route('/')
 def home():

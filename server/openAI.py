@@ -37,39 +37,71 @@ def get_tarot_reading(cards: List[Dict], spread_type: str = "general", question:
     
     cards_text = "\n".join(card_descriptions)
     
+    # Define position meanings for different spreads
+    position_meanings = {
+        "three-card-spread": ["Past/Situation", "Present/Action", "Future/Outcome"],
+        "celtic-cross": [
+            "Present Situation", "Challenge/Cross", "Distant Past/Foundation", 
+            "Possible Future", "Conscious Thoughts", "Unconscious Influences",
+            "Your Approach", "External Influences", "Hopes and Fears", "Final Outcome"
+        ],
+        "chakra-spread": [
+            "Crown Chakra (Spirituality)", "Third Eye (Intuition)", "Throat Chakra (Communication)",
+            "Heart Chakra (Love)", "Solar Plexus (Power)", 
+            "Sacral Chakra (Creativity)", "Root Chakra (Security)"
+        ],
+        "single-card": ["Core Message"]
+    }
+    
     # Create the prompt
     system_prompt = """You are a professional tarot reader with deep knowledge of tarot symbolism and interpretation. 
     Provide insightful, thoughtful readings that help people gain perspective on their situations. 
     Be encouraging while being honest about challenges. Focus on personal growth and empowerment.
     
+    IMPORTANT: Always mention the specific cards by name in your interpretations. Reference how each card relates to its position meaning and connects to other cards in the spread.
+    
     Format your response as a JSON object with the following structure:
     {
-        "overall_message": "A general interpretation of the entire reading",
-        "card_interpretations": [
-            {
-                "position": 1,
-                "card_name": "Card Name",
-                "interpretation": "Specific interpretation for this card in this position"
-            }
-        ],
-        "advice": "Practical advice based on the reading",
+        "overall_message": "A general interpretation mentioning specific cards by name",
+        "advice": "Practical advice referencing the specific cards drawn",
         "theme": "The main theme or energy of the reading"
     }"""
+    
+    # Add position context to the prompt
+    spread_positions = position_meanings.get(spread_type, [f"Position {i+1}" for i in range(len(cards))])
     
     user_prompt = f"""Please provide a tarot reading for the following cards:
 
 {cards_text}
 
 Spread Type: {spread_type}
+Position Meanings: {', '.join(spread_positions)}
 """
     
     if question:
         user_prompt += f"User's Question: {question}\n"
-    
-    user_prompt += """
-Please interpret these cards in relation to each other and provide guidance. 
-Consider the traditional meanings as well as the cards' positions in the spread.
-Be specific about what each card suggests and how they work together."""
+        user_prompt += """
+IMPORTANT INSTRUCTIONS:
+- This reading must specifically answer the user's question above
+- Interpret each card in relation to their question
+- Mention each card by name (e.g., "The Three of Cups", "Death", "King of Wands") in your interpretation
+- Explain what each card means in its specific position and how it relates to their question
+- Describe how the cards relate to each other to answer their question
+- Reference specific cards when giving advice (e.g., "The Hermit suggests you need time for reflection regarding your question")
+- Make the reading feel personal and specific to both their question and these exact cards drawn
+- Focus the entire reading on providing insight and guidance for their specific question
+
+Please interpret these cards specifically to answer the user's question and provide guidance that directly addresses what they asked."""
+    else:
+        user_prompt += """
+IMPORTANT INSTRUCTIONS:
+- Mention each card by name (e.g., "The Three of Cups", "Death", "King of Wands") in your interpretation
+- Explain what each card means in its specific position 
+- Describe how the cards relate to each other and tell a story together
+- Reference specific cards when giving advice (e.g., "The Hermit suggests you need time for reflection")
+- Make the reading feel personal and specific to these exact cards drawn
+
+Please interpret these cards in relation to each other and provide guidance that specifically references the cards by name."""
 
     try:
         response = client.chat.completions.create(
