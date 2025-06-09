@@ -35,7 +35,7 @@
 
 @font-face {
     font-family: 'Cardinal';
-    src: url('/public/fonts/Cardinal.ttf');
+    src: url('/fonts/Cardinal.ttf');
 }
 
 .enter-button{
@@ -85,11 +85,11 @@
 }
 
 .enter-button:hover {
-  transform: translateX(-50%) translateY(-3px) scale(1.05);
+  transform: translate(-50%, -50%) translateY(-3px) scale(1.05);
   box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4);
   animation-duration: 2s;
 }
 
 .enter-button:active {
-  transform: translateX(-50%) translateY(-1px) scale(1.02);
+  transform: translate(-50%, -50%) translateY(-1px) scale(1.02);
 }
