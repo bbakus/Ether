@@ -106,7 +106,9 @@
   }
   
   .enter-button {
-    top: 60%;
+    top: auto;
+    bottom: 10vh;
+    transform: translateX(-50%);
     font-size: 1.3rem;
     padding: 18px 35px;
     min-width: 160px;
@@ -116,11 +118,13 @@
 @media (max-width: 480px) {
   .home-title {
     font-size: 45px;
-    top: 30%;
+    top: 25%;
   }
   
   .enter-button {
-    top: 55%;
+    top: auto;
+    bottom: 8vh;
+    transform: translateX(-50%);
     font-size: 1.2rem;
     padding: 16px 30px;
     min-width: 140px;
@@ -131,11 +135,13 @@
 @media (max-width: 320px) {
   .home-title {
     font-size: 35px;
-    top: 32%;
+    top: 25%;
   }
   
   .enter-button {
-    top: 52%;
+    top: auto;
+    bottom: 6vh;
+    transform: translateX(-50%);
     font-size: 1.1rem;
     padding: 14px 25px;
     min-width: 120px;
