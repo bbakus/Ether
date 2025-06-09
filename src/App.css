@@ -1,0 +1,23 @@
+@font-face {
+  font-family: 'Cardinal';
+  src: url('/public/fonts/Cardinal.ttf');
+}
+
+h1 {
+  font-family: 'Cardinal';
+  text-shadow: 
+    0 0 15px rgba(255, 255, 255, 0.5),
+    0 0 25px rgba(255, 255, 255, 0.3);
+  animation: cosmicColors 12s ease-in-out infinite;
+}
+
+@keyframes cosmicColors {
+  0% { color: #ff6b6b; }
+  16.6% { color: #4ecdc4; }
+  33.3% { color: #45b7d1; }
+  50% { color: #ffeaa7; }
+  66.6% { color: #fd79a8; }
+  83.3% { color: #a29bfe; }
+  100% { color: #ff6b6b; }
+}
+
