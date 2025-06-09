@@ -1,3 +1,33 @@
+/* Global fullscreen and viewport handling */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  height: 100dvh; /* Dynamic viewport height for mobile */
+  width: 100vw;
+  overflow-x: hidden;
+  position: fixed; /* Prevent scrolling and bouncing on mobile */
+}
+
+#root {
+  height: 100vh;
+  height: 100dvh;
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+/* Support for devices with notches */
+@supports (padding: max(0px)) {
+  html, body, #root {
+    padding-left: max(0px, env(safe-area-inset-left));
+    padding-right: max(0px, env(safe-area-inset-right));
+    padding-top: max(0px, env(safe-area-inset-top));
+    padding-bottom: max(0px, env(safe-area-inset-bottom));
+  }
+}
+
 @font-face {
   font-family: 'Cardinal';
   src: url('./Cardinal.ttf');
