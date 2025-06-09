@@ -15,11 +15,13 @@
     z-index: 10;
     color: #ffd700;
     position:fixed;
-    left: 45%;
-    top:15%;
+    left: 50%;
+    top: 20%;
+    transform: translateX(-50%);
     font-size: 80px;
     font-family: 'Cardinal';
     animation: goldenPulse 2s ease-in-out infinite;
+    white-space: nowrap;
 }
 
 @keyframes goldenPulse {
@@ -42,7 +44,9 @@
     font-family: 'Cardinal';
     position:fixed;
     z-index: 10;
-    top: 60rem;
+    top: 65%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     background: linear-gradient(45deg, #4ecdc4 0%, #44a08d 25%, #096a55 50%, #2c3e50 75%, #34495e 100%);
     background-size: 300% 300%;
     border: none;
@@ -92,4 +96,48 @@
 
 .enter-button:active {
   transform: translate(-50%, -50%) translateY(-1px) scale(1.02);
+}
+
+/* Mobile Responsive Design */
+@media (max-width: 768px) {
+  .home-title {
+    font-size: 60px;
+    top: 25%;
+  }
+  
+  .enter-button {
+    top: 60%;
+    font-size: 1.3rem;
+    padding: 18px 35px;
+    min-width: 160px;
+  }
+}
+
+@media (max-width: 480px) {
+  .home-title {
+    font-size: 45px;
+    top: 30%;
+  }
+  
+  .enter-button {
+    top: 55%;
+    font-size: 1.2rem;
+    padding: 16px 30px;
+    min-width: 140px;
+    letter-spacing: 2px;
+  }
+}
+
+@media (max-width: 320px) {
+  .home-title {
+    font-size: 35px;
+    top: 32%;
+  }
+  
+  .enter-button {
+    top: 52%;
+    font-size: 1.1rem;
+    padding: 14px 25px;
+    min-width: 120px;
+  }
 }
