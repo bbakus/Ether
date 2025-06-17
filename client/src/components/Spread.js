@@ -18,7 +18,7 @@ function Spread(){
         setUserQuestion(e.target.value)
     }
 
-    // Add random reversals to cards (30% chance each card is reversed)
+    // Add random reversals to cards
     const addReversals = (cards) => {
         return cards.map(card => {
             const isReversed = Math.random() < 0.5
