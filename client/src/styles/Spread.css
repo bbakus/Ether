@@ -1,0 +1,505 @@
+/* Spread Container */
+.spread-container {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  box-sizing: border-box;
+}
+
+/* Full Screen Background */
+.spread-background {
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover;
+  z-index: -1;
+}
+
+/* Question Input */
+.question-input {
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 25px;
+  padding: 15px 25px;
+  font-size: 1.2rem;
+  color: white;
+  width: 400px;
+  max-width: 90%;
+  margin: 0 auto 3rem auto;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  transition: all 0.3s ease;
+  display: block;
+}
+
+.question-input::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.question-input:focus {
+  outline: none;
+  border-color: rgba(255, 255, 255, 0.6);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.4),
+    0 0 20px rgba(255, 255, 255, 0.3);
+}
+
+/* Button Container */
+.spread-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+  max-width: 1000px;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+/* Cosmic Buttons */
+.cosmic-button {
+  background: linear-gradient(45deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #f5576c 75%, #4facfe 100%);
+  background-size: 300% 300%;
+  border: none;
+  border-radius: 15px;
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 20px 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+  animation: gradientShift 4s ease infinite;
+  position: relative;
+  overflow: hidden;
+  flex: 1;
+  min-width: 180px;
+  max-width: 220px;
+  text-align: center;
+}
+
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.cosmic-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  animation: shimmer 3s infinite;
+}
+
+@keyframes shimmer {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+.cosmic-button:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4);
+  animation-duration: 2s;
+}
+
+.cosmic-button:active {
+  transform: translateY(-1px) scale(1.02);
+}
+
+/* Main Content Layout (Cards + Reading) */
+.spread-content {
+  display: grid;
+  grid-template-columns: 1fr 600px;
+  gap: 8rem;
+  align-items: start;
+  max-width: 1600px;
+  margin: 2rem auto;
+  width: 100%;
+  justify-items: center;
+  min-height: 60vh; /* Ensure consistent layout height */
+}
+
+.cards-section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-self: center;
+}
+
+.reading-section {
+  width: 100%;
+  justify-self: start;
+  min-height: 400px; /* Reserve space to prevent cards from jumping */
+}
+
+/* Card Display Area */
+.cards-display {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 2rem;
+  max-width: 1200px;
+}
+
+/* Single Card Layout */
+.cards-display.single-card {
+  display: flex;
+  justify-content: center;
+}
+
+/* Three Card Spread - Horizontal Line */
+.cards-display.three-card-spread {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  flex-wrap: nowrap;
+}
+
+/* Celtic Cross Layout */
+.cards-display.celtic-cross {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 2rem 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+  gap: 2rem;
+  justify-content: center;
+  align-items: center;
+  max-width: 800px;
+  margin: 2rem auto;
+  position: relative;
+}
+
+/* Main Cross Formation */
+.celtic-cross .card-item:nth-child(1) { grid-column: 2; grid-row: 2; z-index: 1; } /* Present */
+.celtic-cross .card-item:nth-child(2) { 
+  grid-column: 2; 
+  grid-row: 2; 
+  z-index: 2; 
+  position: relative;
+} /* Challenge (horizontal overlap) */
+
+.celtic-cross .card-item:nth-child(2) img {
+  transform: rotate(90deg);
+}
+.celtic-cross .card-item:nth-child(3) { grid-column: 1; grid-row: 2; } /* Past */
+.celtic-cross .card-item:nth-child(4) { grid-column: 3; grid-row: 2; } /* Future */
+.celtic-cross .card-item:nth-child(5) { grid-column: 2; grid-row: 1; } /* Consciousness */
+.celtic-cross .card-item:nth-child(6) { grid-column: 2; grid-row: 3; } /* Unconsciousness */
+
+/* Right Column */
+.celtic-cross .card-item:nth-child(7) { grid-column: 5; grid-row: 1; } /* Own Influence */
+.celtic-cross .card-item:nth-child(8) { grid-column: 5; grid-row: 2; } /* External Influence */
+.celtic-cross .card-item:nth-child(9) { grid-column: 5; grid-row: 3; } /* Hopes and Fears */
+.celtic-cross .card-item:nth-child(10) { grid-column: 5; grid-row: 4; } /* Result */
+
+/* Chakra Spread - Vertical Line */
+.cards-display.chakra-spread {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  max-width: 200px;
+  margin: 2rem auto;
+}
+
+/* Chakra Scroll Indicator */
+.chakra-scroll-indicator {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 25px;
+  padding: 15px 25px;
+  color: white;
+  text-align: center;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  animation: scrollIndicatorPulse 2s ease-in-out infinite;
+  z-index: 10;
+}
+
+.chakra-scroll-indicator p {
+  display: block !important;
+  margin: 0 0 5px 0;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.scroll-arrow {
+  font-size: 1.5rem;
+  animation: scrollBounce 1.5s ease-in-out infinite;
+}
+
+@keyframes scrollIndicatorPulse {
+  0%, 100% {
+    opacity: 0.8;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 0 20px rgba(255, 255, 255, 0.2);
+  }
+  50% {
+    opacity: 1;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4), 0 0 30px rgba(255, 255, 255, 0.4);
+  }
+}
+
+@keyframes scrollBounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(5px);
+  }
+}
+
+/* Individual Card */
+.card-item {
+  position: relative;
+  transition: all 0.3s ease;
+  opacity: 0;
+  transform: translateY(20px) scale(0.9);
+  animation: cardFadeIn 0.6s ease-out forwards;
+}
+
+.card-item:hover {
+  transform: translateY(-5px);
+}
+
+@keyframes cardFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Animation delays for different spreads */
+.single-card .card-item:nth-child(1) { animation-delay: 0.5s; }
+
+.three-card-spread .card-item:nth-child(1) { animation-delay: 0.5s; }
+.three-card-spread .card-item:nth-child(2) { animation-delay: 1.0s; }
+.three-card-spread .card-item:nth-child(3) { animation-delay: 1.5s; }
+
+/* Celtic Cross - Center first, then cross, then column */
+.celtic-cross .card-item:nth-child(1) { animation-delay: 0.5s; } /* Present (center) */
+.celtic-cross .card-item:nth-child(2) { animation-delay: 1.0s; } /* Challenge (horizontal) */
+.celtic-cross .card-item:nth-child(5) { animation-delay: 1.5s; } /* Consciousness (top) */
+.celtic-cross .card-item:nth-child(6) { animation-delay: 2.0s; } /* Unconsciousness (bottom) */
+.celtic-cross .card-item:nth-child(3) { animation-delay: 2.5s; } /* Past (left) */
+.celtic-cross .card-item:nth-child(4) { animation-delay: 3.0s; } /* Future (right) */
+.celtic-cross .card-item:nth-child(7) { animation-delay: 3.5s; } /* Own Influence */
+.celtic-cross .card-item:nth-child(8) { animation-delay: 4.0s; } /* External Influence */
+.celtic-cross .card-item:nth-child(9) { animation-delay: 4.5s; } /* Hopes and Fears */
+.celtic-cross .card-item:nth-child(10) { animation-delay: 5.0s; } /* Result */
+
+/* Chakra Spread - Top to bottom (Crown to Root) */
+.chakra-spread .card-item:nth-child(1) { animation-delay: 0.5s; } /* Crown */
+.chakra-spread .card-item:nth-child(2) { animation-delay: 1.0s; } /* Third Eye */
+.chakra-spread .card-item:nth-child(3) { animation-delay: 1.5s; } /* Throat */
+.chakra-spread .card-item:nth-child(4) { animation-delay: 2.0s; } /* Heart */
+.chakra-spread .card-item:nth-child(5) { animation-delay: 2.5s; } /* Solar Plexus */
+.chakra-spread .card-item:nth-child(6) { animation-delay: 3.0s; } /* Sacral */
+.chakra-spread .card-item:nth-child(7) { animation-delay: 3.5s; } /* Root */
+
+.card-item img {
+  width: 260px;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 20px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  border: 3px solid transparent;
+}
+
+.card-item p {
+  display: none;
+}
+
+/* Reversed Card Styling */
+.card-item.reversed img {
+  transform: rotate(180deg);
+  border-color: rgba(255, 100, 100, 0.8);
+  animation: redPulseGlow 4s ease-in-out infinite;
+}
+
+@keyframes redPulseGlow {
+  0%, 100% {
+    box-shadow: 
+      0 1px 5px rgba(0, 0, 0, 0.3),
+      0 0 5px rgba(255, 100, 100, 0.6),
+      0 0 7px rgba(255, 100, 100, 0.3);
+  }
+  50% {
+    box-shadow: 
+      0 4px 15px rgba(0, 0, 0, 0.3),
+      0 0 5px rgba(255, 100, 100, 0.9),
+      0 0 15px rgba(255, 100, 100, 0.6),
+      0 0 30px rgba(255, 100, 100, 0.3);
+  }
+}
+
+.reversed-label {
+  display: none;
+}
+
+/* AI Reading Button */
+.ai-reading-button {
+  background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #ffeaa7);
+  background-size: 300% 300%;
+  border: none;
+  border-radius: 25px;
+  color: white;
+  font-size: 1.3rem;
+  font-weight: 700;
+  padding: 18px 40px;
+  cursor: pointer;
+  margin: 2rem auto;
+  display: block;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  animation: pulseGlow 3s ease-in-out infinite;
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), 0 0 20px rgba(255, 255, 255, 0.2);
+    background-position: 0% 50%;
+  }
+  50% {
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4), 0 0 30px rgba(255, 255, 255, 0.4);
+    background-position: 100% 50%;
+  }
+}
+
+.ai-reading-button:hover {
+  transform: translateY(-3px) scale(1.05);
+  animation-duration: 1.5s;
+}
+
+/* Loading State */
+.loading {
+  color: #ffd700;
+  font-size: 1.4rem;
+  font-weight: 600;
+  text-align: center;
+  margin: 2rem auto;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  animation: goldenPulse 2s ease-in-out infinite;
+}
+
+@keyframes goldenPulse {
+  0%, 100% { 
+    opacity: 0.7;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+  }
+  50% { 
+    opacity: 1;
+    text-shadow: 0 0 20px rgba(255, 215, 0, 0.8), 0 0 30px rgba(255, 215, 0, 0.4);
+  }
+}
+
+/* Reading Result */
+.reading-result {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 2rem;
+  margin: 0 0 0 6rem;
+  margin-top: 2rem;
+  backdrop-filter: blur(15px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  width: 100%;
+  color: white;
+  line-height: 1.6;
+  height: fit-content;
+}
+
+.reading-result h3 {
+  color: #ffeaa7;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.reading-result p {
+  margin-bottom: 1rem;
+}
+
+/* Reading Action Buttons */
+.reading-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 4rem;
+  flex-wrap: wrap;
+}
+
+.cosmic-button.secondary {
+  background: linear-gradient(45deg, #4ecdc4 0%, #44a08d 25%, #096a55 50%, #2c3e50 75%, #34495e 100%);
+  background-size: 300% 300%;
+  font-size: 0.9rem;
+  padding: 15px 25px;
+  min-width: 160px;
+  max-width: 200px;
+  flex: 1;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .spread-content {
+    flex-direction: column;
+    gap: 2rem;
+  }
+  
+  .reading-section {
+    flex: none;
+    max-width: none;
+  }
+  
+  .reading-result {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .spread-buttons {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .question-input {
+    width: 95%;
+    font-size: 1rem;
+  }
+  
+  .card-item img {
+    width: 160px;
+  }
+  
+  .cards-display {
+    gap: 1.5rem;
+  }
+  
+  .spread-content {
+    padding: 0 1rem;
+  }
+}
