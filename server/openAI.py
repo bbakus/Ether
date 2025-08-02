@@ -174,7 +174,7 @@ Include both traditional meanings and how this card might be interpreted in the 
 
     try:
         response = client.chat.completions.create(
-            model="gpt-4",
+            model="gpt-4o",
             messages=[
                 {"role": "system", "content": system_prompt},
                 {"role": "user", "content": user_prompt}
